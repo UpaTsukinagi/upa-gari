@@ -16,30 +16,132 @@ body{display:grid;place-items:center;padding:8px;min-height:100dvh;overflow:hidd
 .pill{background:rgba(255,255,255,.9);border-radius:20px;padding:8px 16px;box-shadow:0 4px 12px rgba(120,100,180,.15);display:flex;flex-direction:column;min-width:88px}
 .label{font-size:11px;font-weight:800;letter-spacing:.12em;color:#9c8fc4}.value{font-size:24px;font-weight:900;line-height:1.1}.warn .value{color:var(--red)}
 #basket{position:absolute;bottom:max(22px,env(safe-area-inset-bottom));width:118px;height:82px;transform:translateX(-50%);z-index:15;filter:drop-shadow(0 8px 9px rgba(120,100,180,.32));pointer-events:none}
-.drop{position:absolute;width:68px;height:68px;z-index:10;pointer-events:none}.drop img{width:100%;height:100%;object-fit:contain;display:block}.badge{position:absolute;top:-2px;right:-4px;color:#fff;font-weight:900;font-size:13px;border-radius:999px;padding:2px 7px;box-shadow:0 2px 6px rgba(0,0,0,.2)}.goldBadge{background:var(--gold)}.redBadge{background:var(--red)}
+.drop{position:absolute;width:68px;height:68px;z-index:10;pointer-events:none}
+.drop img{width:100%;height:100%;object-fit:contain;display:block}
+.badge{position:absolute;top:-2px;right:-4px;color:#fff;font-weight:900;font-size:13px;border-radius:999px;padding:2px 7px;box-shadow:0 2px 6px rgba(0,0,0,.2)}
+.goldBadge{background:var(--gold)}.redBadge{background:var(--red)}
 .float{position:absolute;z-index:25;font-size:20px;font-weight:900;pointer-events:none;animation:up .9s ease-out forwards}@keyframes up{to{opacity:0;transform:translateY(-46px) scale(1.12)}}
-.overlay{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(180deg,rgba(232,225,251,.95),rgba(207,242,237,.97));gap:12px}.hidden{display:none}.hero{width:112px;height:112px;object-fit:contain}.overlay h1{font-size:30px;margin:0}.overlay p{font-size:14px;line-height:1.65;margin:0;color:#6c5f91;max-width:300px}.rules{display:grid;gap:7px}.rule{display:grid;grid-template-columns:34px 1fr;align-items:center;gap:8px;text-align:left;font-size:13px;font-weight:800}.rule img{width:34px;height:34px;object-fit:contain}.note{font-size:12px;color:#8e7cc3;font-weight:800}
-button{border:0;border-radius:999px;padding:14px 38px;min-height:48px;background:linear-gradient(135deg,var(--lav),var(--aqua));color:#fff;font:900 17px inherit;box-shadow:0 8px 18px rgba(120,100,180,.32);touch-action:manipulation}button:active{transform:scale(.97)}.final{font-size:58px;font-weight:900;line-height:1}.final small{font-size:20px;color:#8e7cc3;margin-left:4px}
+.overlay{position:absolute;inset:0;z-index:40;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:24px;background:linear-gradient(180deg,rgba(232,225,251,.95),rgba(207,242,237,.97));gap:12px}
+.hidden{display:none}.hero{width:112px;height:112px;object-fit:contain}.overlay h1{font-size:30px;margin:0}.overlay p{font-size:14px;line-height:1.65;margin:0;color:#6c5f91;max-width:300px}
+.rules{display:grid;gap:7px}.rule{display:grid;grid-template-columns:34px 1fr;align-items:center;gap:8px;text-align:left;font-size:13px;font-weight:800}.rule img{width:34px;height:34px;object-fit:contain}
+.note{font-size:12px;color:#8e7cc3;font-weight:800}
+button{border:0;border-radius:999px;padding:14px 38px;min-height:48px;background:linear-gradient(135deg,var(--lav),var(--aqua));color:#fff;font:900 17px inherit;box-shadow:0 8px 18px rgba(120,100,180,.32);touch-action:manipulation}
+button:active{transform:scale(.97)}
+.final{font-size:58px;font-weight:900;line-height:1}.final small{font-size:20px;color:#8e7cc3;margin-left:4px}
 @media(max-height:620px){.overlay{gap:8px;padding:14px}.hero{width:80px;height:80px}.overlay h1{font-size:24px}.overlay p{font-size:12px}.rule{font-size:12px}.rule img{width:28px;height:28px}.note{font-size:11px}}
 </style>
 </head>
 <body>
 <div id="game">
   <div id="play"></div>
-  <div id="hud"><div class="pill"><span class="label">SCORE</span><span id="score" class="value">0</span></div><div id="timerPill" class="pill"><span class="label">TIME</span><span id="time" class="value">30</span></div></div>
-  <svg id="basket" viewBox="0 0 118 82" xmlns="http://www.w3.org/2000/svg" aria-hidden="true"><defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9aeef"/><stop offset="1" stop-color="#8fd3e6"/></linearGradient></defs><path d="M8 26 L110 26 L96 74 Q59 84 22 74 Z" fill="url(#g)" stroke="#6b5b95" stroke-width="4" stroke-linejoin="round"/><path d="M8 26 Q59 42 110 26" fill="none" stroke="#6b5b95" stroke-width="4" stroke-linecap="round"/><path d="M18 34 Q59 48 100 34" fill="none" stroke="#efe6ff" stroke-width="3" opacity=".7"/></svg>
-  <div id="start" class="overlay"><img class="hero" src="upa_normal.svg" alt="うぱ"><h1>うぱ狩り</h1><p>落ちてくるうぱを、かごでキャッチ！<br>画面を指でなぞると、かごが動くよ。制限時間は30秒。</p><div class="rules"><div class="rule"><img src="upa_normal.svg" alt=""><span>ふつうのうぱ = 1うぱ</span></div><div class="rule"><img src="upa_gold.svg" alt=""><span>金のうぱ = 3うぱ</span></div><div class="rule"><img src="upa_red.svg" alt=""><span>赤のうぱ = 時間 +3秒</span></div></div><div class="note">20うぱごとに落下スピードUP！</div><button id="startBtn" type="button">スタート</button></div>
-  <div id="end" class="overlay hidden"><h1>タイムアップ！</h1><div id="final" class="final">0<small>うぱ</small></div><button id="retryBtn" type="button">もう一回</button></div>
+  <div id="hud">
+    <div class="pill"><span class="label">SCORE</span><span id="score" class="value">0</span></div>
+    <div id="timerPill" class="pill"><span class="label">TIME</span><span id="time" class="value">30</span></div>
+  </div>
+  <svg id="basket" viewBox="0 0 118 82" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+    <defs><linearGradient id="g" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#c9aeef"/><stop offset="1" stop-color="#8fd3e6"/></linearGradient></defs>
+    <path d="M8 26 L110 26 L96 74 Q59 84 22 74 Z" fill="url(#g)" stroke="#6b5b95" stroke-width="4" stroke-linejoin="round"/>
+    <path d="M8 26 Q59 42 110 26" fill="none" stroke="#6b5b95" stroke-width="4" stroke-linecap="round"/>
+    <path d="M18 34 Q59 48 100 34" fill="none" stroke="#efe6ff" stroke-width="3" opacity=".7"/>
+  </svg>
+
+  <div id="start" class="overlay">
+    <img class="hero" src="upa_normal.svg?v=20260905b" alt="うぱ">
+    <h1>うぱ狩り</h1>
+    <p>落ちてくるうぱを、かごでキャッチ！<br>画面を指でなぞると、かごが動くよ。制限時間は30秒。</p>
+    <div class="rules">
+      <div class="rule"><img src="upa_normal.svg?v=20260905b" alt=""><span>ふつうのうぱ = 1うぱ</span></div>
+      <div class="rule"><img src="upa_gold.svg?v=20260905b" alt=""><span>金のうぱ = 3うぱ</span></div>
+      <div class="rule"><img src="upa_red.svg?v=20260905b" alt=""><span>赤のうぱ = 時間 +3秒</span></div>
+    </div>
+    <div class="note">20うぱごとに落下スピードUP！</div>
+    <button id="startBtn" type="button">スタート</button>
+  </div>
+
+  <div id="end" class="overlay hidden">
+    <h1>タイムアップ！</h1>
+    <div id="final" class="final">0<small>うぱ</small></div>
+    <button id="retryBtn" type="button">もう一回</button>
+  </div>
 </div>
+
 <script>
-(()=>{const game=document.getElementById('game'),play=document.getElementById('play'),basket=document.getElementById('basket'),scoreEl=document.getElementById('score'),timeEl=document.getElementById('time'),timerPill=document.getElementById('timerPill'),start=document.getElementById('start'),end=document.getElementById('end'),finalEl=document.getElementById('final'),startBtn=document.getElementById('startBtn'),retryBtn=document.getElementById('retryBtn');const src={normal:'upa_normal.svg',gold:'upa_gold.svg',red:'upa_red.svg'},basketW=118,basketH=82;let w=0,h=0,basketX=0,score=0,timeLeft=30,running=false,last=0,spawnAcc=0,raf=0,timer=0,drops=[];
-function measure(){const r=game.getBoundingClientRect();w=r.width;h=r.height;if(!basketX)basketX=w/2;moveBasket(basketX)}function moveBasket(x){basketX=Math.max(basketW/2,Math.min(w-basketW/2,x));basket.style.left=basketX+'px'}function pointerX(e){const r=game.getBoundingClientRect();moveBasket(e.clientX-r.left)}
-game.addEventListener('pointerdown',e=>{if(!running)return;game.setPointerCapture?.(e.pointerId);pointerX(e);e.preventDefault()});game.addEventListener('pointermove',e=>{if(!running)return;if(e.pointerType==='mouse'||e.buttons||game.hasPointerCapture?.(e.pointerId))pointerX(e)});window.addEventListener('resize',measure);
-function typeRoll(){const r=Math.random();return r<.12?'gold':r<.27?'red':'normal'}function spawn(){const type=typeRoll(),size=68,x=18+Math.random()*Math.max(1,w-36-size),el=document.createElement('div');el.className='drop';el.style.left=x+'px';el.style.top='-74px';const img=document.createElement('img');img.src=src[type];img.alt='';el.appendChild(img);if(type!=='normal'){const b=document.createElement('div');b.className='badge '+(type==='gold'?'goldBadge':'redBadge');b.textContent=type==='gold'?'×3':'+3s';el.appendChild(b)}play.appendChild(el);const level=Math.floor(score/20);drops.push({el,x,y:-74,size,type,speed:(1.6+Math.random()*1.3)*(1+level*.18),caught:false})}
-function floater(text,x,y,color){const f=document.createElement('div');f.className='float';f.textContent=text;f.style.left=x+'px';f.style.top=y+'px';f.style.color=color;play.appendChild(f);setTimeout(()=>f.remove(),900)}function hud(){scoreEl.textContent=score;timeEl.textContent=Math.max(0,Math.ceil(timeLeft));timerPill.classList.toggle('warn',timeLeft<=10)}function clearDrops(){drops.forEach(d=>d.el.remove());drops=[]}
-function loop(ts){if(!running)return;if(!last)last=ts;const dt=Math.min(40,ts-last);last=ts;spawnAcc+=dt;const interval=Math.max(420,900-score*4);if(spawnAcc>=interval){spawnAcc=0;spawn()}const basketTop=h-22-basketH*.55,bLeft=basketX-basketW/2+10,bRight=basketX+basketW/2-10;for(let i=drops.length-1;i>=0;i--){const d=drops[i];d.y+=d.speed*(dt/16.7);d.el.style.top=d.y+'px';const cx=d.x+d.size/2,bottom=d.y+d.size*.84;if(!d.caught&&bottom>=basketTop&&d.y<h-10&&cx>bLeft&&cx<bRight){d.caught=true;let pts=1,label='+1',color='#8e7cc3';if(d.type==='gold'){pts=3;label='+3';color='#c98a00'}if(d.type==='red'){pts=0;timeLeft+=3;label='+3s';color='#e74c68'}score+=pts;floater(label,d.x,d.y-8,color);d.el.remove();drops.splice(i,1);hud();continue}if(d.y>h+20){d.el.remove();drops.splice(i,1)}}raf=requestAnimationFrame(loop)}
-function startGame(){clearInterval(timer);cancelAnimationFrame(raf);clearDrops();measure();score=0;timeLeft=30;last=0;spawnAcc=0;basketX=w/2;moveBasket(basketX);hud();start.classList.add('hidden');end.classList.add('hidden');running=true;timer=setInterval(()=>{timeLeft--;hud();if(timeLeft<=0)finish()},1000);raf=requestAnimationFrame(loop)}function finish(){if(!running)return;running=false;clearInterval(timer);cancelAnimationFrame(raf);clearDrops();timeLeft=0;hud();finalEl.innerHTML=score+'<small>うぱ</small>';end.classList.remove('hidden')}
-startBtn.addEventListener('click',startGame);retryBtn.addEventListener('click',startGame);measure();hud()})();
+(() => {
+  const game=document.getElementById('game'),play=document.getElementById('play'),basket=document.getElementById('basket');
+  const scoreEl=document.getElementById('score'),timeEl=document.getElementById('time'),timerPill=document.getElementById('timerPill');
+  const start=document.getElementById('start'),end=document.getElementById('end'),finalEl=document.getElementById('final');
+  const startBtn=document.getElementById('startBtn'),retryBtn=document.getElementById('retryBtn');
+
+  const src={normal:'upa_normal.svg?v=20260905b',gold:'upa_gold.svg?v=20260905b',red:'upa_red.svg?v=20260905b'};
+  const basketW=118,basketH=82;
+  let w=0,h=0,basketX=0,score=0,timeLeft=30,running=false,last=0,spawnAcc=0,raf=0,timer=0,drops=[];
+
+  function measure(){const r=game.getBoundingClientRect();w=r.width;h=r.height;if(!basketX)basketX=w/2;moveBasket(basketX)}
+  function moveBasket(x){basketX=Math.max(basketW/2,Math.min(w-basketW/2,x));basket.style.left=basketX+'px'}
+  function pointerX(e){const r=game.getBoundingClientRect();moveBasket(e.clientX-r.left)}
+
+  game.addEventListener('pointerdown',e=>{
+    if(!running)return;
+    game.setPointerCapture?.(e.pointerId);
+    pointerX(e);
+    e.preventDefault();
+  });
+  game.addEventListener('pointermove',e=>{
+    if(!running)return;
+    if(e.pointerType==='mouse' || e.buttons || game.hasPointerCapture?.(e.pointerId)) pointerX(e);
+  });
+  window.addEventListener('resize',measure);
+
+  function typeRoll(){const r=Math.random();return r<.12?'gold':r<.27?'red':'normal'}
+  function spawn(){
+    const type=typeRoll(),size=68,x=18+Math.random()*Math.max(1,w-36-size);
+    const el=document.createElement('div');el.className='drop';el.style.left=x+'px';el.style.top='-74px';
+    const img=document.createElement('img');img.src=src[type];img.alt='';el.appendChild(img);
+    if(type!=='normal'){const b=document.createElement('div');b.className='badge '+(type==='gold'?'goldBadge':'redBadge');b.textContent=type==='gold'?'×3':'+3s';el.appendChild(b)}
+    play.appendChild(el);
+    const level=Math.floor(score/20);
+    drops.push({el,x,y:-74,size,type,speed:(1.6+Math.random()*1.3)*(1+level*.18),caught:false});
+  }
+  function float(text,x,y,color){const f=document.createElement('div');f.className='float';f.textContent=text;f.style.left=x+'px';f.style.top=y+'px';f.style.color=color;play.appendChild(f);setTimeout(()=>f.remove(),900)}
+  function hud(){scoreEl.textContent=score;timeEl.textContent=Math.max(0,Math.ceil(timeLeft));timerPill.classList.toggle('warn',timeLeft<=10)}
+  function clearDrops(){drops.forEach(d=>d.el.remove());drops=[]}
+
+  function loop(ts){
+    if(!running)return;
+    if(!last)last=ts;
+    const dt=Math.min(40,ts-last);last=ts;spawnAcc+=dt;
+    const interval=Math.max(420,900-score*4);
+    if(spawnAcc>=interval){spawnAcc=0;spawn()}
+    const basketTop=h-Math.max(22,22)-basketH*.55,bLeft=basketX-basketW/2+10,bRight=basketX+basketW/2-10;
+    for(let i=drops.length-1;i>=0;i--){
+      const d=drops[i];d.y+=d.speed*(dt/16.7);d.el.style.top=d.y+'px';
+      const cx=d.x+d.size/2,bottom=d.y+d.size*.84;
+      if(!d.caught && bottom>=basketTop && d.y<h-10 && cx>bLeft && cx<bRight){
+        d.caught=true;let pts=1,label='+1',color='#8e7cc3';
+        if(d.type==='gold'){pts=3;label='+3';color='#c98a00'}
+        if(d.type==='red'){pts=0;timeLeft+=3;label='+3s';color='#e74c68'}
+        score+=pts;float(label,d.x,d.y-8,color);d.el.remove();drops.splice(i,1);hud();continue;
+      }
+      if(d.y>h+20){d.el.remove();drops.splice(i,1)}
+    }
+    raf=requestAnimationFrame(loop);
+  }
+
+  function startGame(){
+    clearInterval(timer);cancelAnimationFrame(raf);clearDrops();measure();
+    score=0;timeLeft=30;last=0;spawnAcc=0;basketX=w/2;moveBasket(basketX);hud();
+    start.classList.add('hidden');end.classList.add('hidden');running=true;
+    timer=setInterval(()=>{timeLeft--;hud();if(timeLeft<=0)finish()},1000);
+    raf=requestAnimationFrame(loop);
+  }
+  function finish(){
+    if(!running)return;
+    running=false;clearInterval(timer);cancelAnimationFrame(raf);clearDrops();timeLeft=0;hud();
+    finalEl.innerHTML=score+'<small>うぱ</small>';end.classList.remove('hidden');
+  }
+  startBtn.addEventListener('click',startGame);retryBtn.addEventListener('click',startGame);
+  measure();hud();
+})();
 </script>
 </body>
 </html>
